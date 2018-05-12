@@ -1,0 +1,42 @@
+buildscript {
+    repositories {
+        gradlePluginPortal()
+        maven { url "https://jitpack.io" }
+    }
+    dependencies {
+        classpath "com.github.n0mer:gradle-git-properties:master-SNAPSHOT"
+    }
+}
+
+plugins {
+    id 'maven-publish'
+    id 'com.jfrog.bintray' version '1.8.0'
+//    id 'com.jfrog.artifactory' version '4.7.2' TODO: deploy snapshot
+}
+
+allprojects {
+    version "0.1.0-SNAPSHOT"
+    group 'com.github.stachu540'
+    description "Sample project"
+
+    repositories {
+        jcenter()
+    }
+}
+
+subprojects {
+    apply plugin: "java"
+    apply from: "${rootDir}/deploy.gradle"
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    dependencies {
+        testCompile "junit:junit:4.12"
+    }
+}
+
+wrapper {
+    gradleVersion = "4.7"
+    distributionType = Wrapper.DistributionType.ALL
+}

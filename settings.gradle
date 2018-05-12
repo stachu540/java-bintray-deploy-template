@@ -1,0 +1,3 @@
+rootProject.name = 'java-bintray-deploy-template'
+
+include "common", "core" // etc.
